@@ -68,6 +68,17 @@
           <button onClick="parseScript('a')">RUN &gt;</button>
         </div>
 
+        <h2>Print the version of yt-dlp</h2>
+        <div id="pythonScript" class="aa">
+          <pre>
+<code>import pyodide_http</code>
+<code>pyodide_http.patch_all()</code>
+<code>import urllib</code>
+<code>urllib.request.urlopen('https://www.youtube.com/watch?v=qhKci8jY510')</code>
+</pre>
+          <button onClick="parseScript('aa')">RUN &gt;</button>
+        </div>
+
         <h2><a target="_blank" href="https://github.com/yt-dlp/yt-dlp#extracting-information">Extracting information</a></h2>
         <div id="pythonScript" class="b">
           <pre>
@@ -188,7 +199,7 @@
          *   https://github.com/pyodide/pyodide/releases/download/0.27.0/pyodide-0.27.0.tar.bz2
          * files extracted to local mirror:
          *   openssl-1.1.1w.zip
-         *   pyodide_http-0.2.1-py3-none-any.whl
+         *   pyodide_http-0.2.2-py3-none-any.whl
          *   ssl-1.0.0-py2.py3-none-any.whl
          * =====================================================================
          * fork:
@@ -228,7 +239,7 @@
 
         let term;
         globalThis.pyodide = await loadPyodide({
-          indexURL:    'http://127.0.0.1/pyodide/',
+          indexURL:    'https://leeblackc.github.io/single-page-apps/yt-dlp-web-console/js/pyodide-0.27.0-fork-2.0.0/',
           lockFileURL: arrayBufferToDataUri(libData['lockFileURL'], 'application/json'),
           stdLibURL:   arrayBufferToDataUri(libData['stdLibURL'],   'application/zip'),
           stdin: () => {
