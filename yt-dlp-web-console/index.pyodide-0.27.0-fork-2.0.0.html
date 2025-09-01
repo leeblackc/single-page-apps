@@ -460,6 +460,29 @@
         }
 
         $(".loading").hide();
+          pyodide.runPython(
+              `
+            import ssl
+            import pyodide_http
+            import yt_dlp
+            import json
+            ssl._create_default_https_context = ssl._create_unverified_context
+            pyodide_http.patch_all()
+            print("yt_dlp imported: " + yt_dlp.version.__version__)
+            URL = 'https://www.youtube.com/watch?v=qhKci8jY510'
+            ydl_opts = {
+                        "extractor_args": {
+                            'youtube': {
+                                'player_skip': ['webpage','initial_data'],
+                                'innertube_host': ['https://proxy-player-api.1481784416.workers.dev']
+                            }
+                        }
+                    }
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                info = ydl.extract_info(URL, download=False)
+                print(json.dumps(ydl.sanitize_info(info)))
+          `
+          );
       }
 
       window.console_ready = main();
@@ -512,6 +535,8 @@
 
         return `data:${mimeType};base64,${base64String}`;
       }
+
+
     </script>
 
   </body>
